@@ -1,14 +1,13 @@
-version: "3.8"
-
 services:
   mysql:
-    
     image: mysql:5.7
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: devops
-     
+    command: --bind-address=0.0.0.0
+    ports:
+      - "3306:3306"
     volumes:
       - ./mysql-data:/var/lib/mysql
       - ./message.sql:/docker-entrypoint-initdb.d/message.sql  
@@ -43,5 +42,3 @@ services:
       retries: 5
       start_period: 30s
 
-networks:
-  twotier:
