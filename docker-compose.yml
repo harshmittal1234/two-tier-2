@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   mysql:
     image: mysql:5.7
@@ -10,7 +12,7 @@ services:
       - "3306:3306"
     volumes:
       - ./mysql-data:/var/lib/mysql
-      - ./message.sql:/docker-entrypoint-initdb.d/message.sql  
+      - ./message.sql:/docker-entrypoint-initdb.d/message.sql
     networks:
       - twotier
     healthcheck:
@@ -41,4 +43,8 @@ services:
       timeout: 5s
       retries: 5
       start_period: 30s
+
+networks:
+  twotier:
+    driver: bridge
 
